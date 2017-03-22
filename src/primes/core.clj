@@ -2,7 +2,9 @@
   [:require [clojure.string :as string]])
 
 (def sieve-bounds (for [i (range 1 (Math/log10 Integer/MAX_VALUE))]
-                    (num-primes-below (Math/pow 10 (Math/ceil i)))))
+                    (let [sieve-bound (int (Math/pow 10 (Math/ceil i)))
+                          n-primes (num-primes-below sieve-bound)]
+                      [n-primes sieve-bound])))
 
 (defn square [x]
   (* x x))
@@ -29,22 +31,11 @@
 (defn find-sieve-upper-bound
   "Given a number of primes to find, K, return the upper bound we will need to sieve for."
   [k]
-  (loop [bot 0
-         top (* k 10)
-         ;top Integer/MAX_VALUE
-         ]
-    (if (= top (inc bot))
-      "DONE"
-    (let [mid (int (avg bot top))
-          n (num-primes-below mid)]
-      (println (format "[%s - %s]" bot top))
-      (if (and (> n k)
-               ;(< neighbor k)
-               )
-        mid
-        (if (< n k)
-          (recur bot mid)
-          (recur mid top)))))))
+  (->> sieve-bounds
+       (filter (fn [[n-primes sieve-bound]]
+                 (> n-primes k)))
+       first
+       last))
 
 (defn prime-sieve
   "Use a sieve to find all primes up to N.
