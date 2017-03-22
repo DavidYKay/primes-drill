@@ -79,11 +79,35 @@
                  (for [b primes]
                    (* a b)))}))
 
+(def vertical-divider "|")
+
+(defn dividing-string [n]
+  (apply str (repeat n "-")))
+
+(defn format-prime-table [{:keys [primes products]}]
+  (let [column-width (->> products
+                          flatten
+                          (apply max)
+                          str
+                          count)
+        header (string/join " " primes)]
+    (loop [accum [header (dividing-string (count header))]
+           primes primes
+           products products]
+      (if (or (empty? primes)
+              (empty? products))
+        (string/join "\n" accum)
+        (recur
+         (conj accum (string/join " " [(first primes) vertical-divider
+                                       (string/join " " (first products))
+                                       ]))
+         (rest primes)
+         (rest products))))))
+
 (defn print-prime-table
   "Prints multiplication table of the first k prime numbers."
   [k]
-  (doseq [row (prime-table k)]
-    (println row)))
+  (println (format-prime-table (prime-table k))))
 
 ;; Notes 
 ;; ● Consider complexity. How fast does your code run? How does it scale? 
