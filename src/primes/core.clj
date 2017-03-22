@@ -89,5 +89,5 @@
 
 (defn -main
   "Prints multiplication table of the first 10 prime numbers."
-  [x]
+  [& args]
   (print-prime-table 10))
