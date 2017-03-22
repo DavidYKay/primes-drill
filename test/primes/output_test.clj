@@ -21,7 +21,14 @@
              (pad-entry "1" 3) => "  1"))
 
 (facts "Format prime table"
-       (fact "Can format prime table"
+       (fact "Can format header"
+             (header 3 (:primes example-table)) => "        2   3   5   7  11  13  17  19  23  29"
+             )
+             
+       (fact "Can format row"
+             (row 3 "2" (first (:products example-table))) => "  2 |   4   6  10  14  22  26  34  38  46  58")
+       
+       (future-fact "Can format prime table"
              (let [expected (string/join "\n"
                                          ["        2   3   5   7  11  13  17  19  23  29"
                                           "    -----------------------------------------"
