@@ -10,7 +10,7 @@
 (defn header-divider [cell-width num-primes]
   (str
    (repeat-string " " (inc cell-width))
-   (repeat-string horizontal-divider (dec (* num-primes (inc cell-width))))))
+   (repeat-string horizontal-divider (inc (* num-primes (inc cell-width))))))
 
 (defn pad-entry [e cell-width]
   (let [len (count (str e))]
@@ -39,8 +39,7 @@
                           flatten
                           (apply max)
                           str
-                          count)
-        ]
+                          count)]
     (loop [accum [(header cell-width primes)
                    (header-divider cell-width (count primes))]
            primes primes
