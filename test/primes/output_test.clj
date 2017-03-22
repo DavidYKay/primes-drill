@@ -28,7 +28,7 @@
        (fact "Can format row"
              (row 3 "2" (first (:products example-table))) => "  2 |   4   6  10  14  22  26  34  38  46  58")
        
-       (future-fact "Can format prime table"
+       (fact "Can format prime table"
              (let [expected (string/join "\n"
                                          ["        2   3   5   7  11  13  17  19  23  29"
                                           "    -----------------------------------------"
@@ -43,15 +43,4 @@
                                           " 23 |  46  69 115 161 253 299 391 437 529 667"
                                           " 29 |  58  87 145 203 319 377 493 551 667 841"])]
                    (format-prime-table example-table) => expected)))
-
-
-
-
-
-
-
-
-
-
-
 

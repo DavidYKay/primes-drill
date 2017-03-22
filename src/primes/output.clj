@@ -2,13 +2,15 @@
   [:require [clojure.string :as string]])
 
 (def vertical-divider "|")
-(def horizontal-divider "|")
+(def horizontal-divider "-")
 
 (defn repeat-string [c n]
   (apply str (repeat n c)))
 
-(defn dividing-string [n]
-  (repeat-string horizontal-divider n))
+(defn header-divider [cell-width num-primes]
+  (str
+   (repeat-string " " (inc cell-width))
+   (repeat-string horizontal-divider (dec (* num-primes (inc cell-width))))))
 
 (defn pad-entry [e cell-width]
   (let [len (count (str e))]
@@ -33,23 +35,21 @@
                 (map #(cell % cell-width) primes))))
 
 (defn format-prime-table [{:keys [primes products]}]
-  (let [column-width (->> products
+  (let [cell-width (->> products
                           flatten
                           (apply max)
                           str
                           count)
-        header (string/join " " primes)
         ]
-    (loop [accum [header (dividing-string (count header))]
+    (loop [accum [(header cell-width primes)
+                   (header-divider cell-width (count primes))]
            primes primes
            products products]
       (if (or (empty? primes)
               (empty? products))
         (string/join "\n" accum)
         (recur
-         (conj accum (string/join " " [(first primes) vertical-divider
-                                       (string/join " " (first products))
-                                       ]))
+         (conj accum (row cell-width (first primes) (first products)))
          (rest primes)
          (rest products))))))
 
