@@ -1,12 +1,15 @@
 (ns primes.core
-  [:require [clojure.string :as string]]
+  [:require [clojure.string :as string]])
 
-  )
+(def sieve-bounds (for [i (range 1 (Math/log10 Integer/MAX_VALUE))]
+                    (num-primes-below (Math/pow 10 (Math/ceil i)))))
 
 (defn square [x]
   (* x x))
 
-(defn avg [& args]
+(defn avg
+  "Finds the truncated integer mean"
+  [& args]
   (/ (reduce + args)
      (count args)))
 
@@ -27,11 +30,21 @@
   "Given a number of primes to find, K, return the upper bound we will need to sieve for."
   [k]
   (loop [bot 0
-         top Integer/MAX_VALUE
-         mid (avg top bot)
+         top (* k 10)
+         ;top Integer/MAX_VALUE
          ]
-
-    ))
+    (if (= top (inc bot))
+      "DONE"
+    (let [mid (int (avg bot top))
+          n (num-primes-below mid)]
+      (println (format "[%s - %s]" bot top))
+      (if (and (> n k)
+               ;(< neighbor k)
+               )
+        mid
+        (if (< n k)
+          (recur bot mid)
+          (recur mid top)))))))
 
 (defn prime-sieve
   "Use a sieve to find all primes up to N.
