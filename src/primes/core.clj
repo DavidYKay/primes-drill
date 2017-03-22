@@ -1,6 +1,14 @@
 (ns primes.core
   [:require [clojure.string :as string]])
 
+(defn num-primes-below
+  "How many primes are below N?"
+  [n]
+  ;; FIXME: this is an APPROXIMATION, based on Gauss & Legendre
+  ;; https://en.wikipedia.org/wiki/Prime-counting_function
+  (int (/ n
+          (Math/log n))))
+
 (def sieve-bounds (for [i (range 1 (Math/log10 Integer/MAX_VALUE))]
                     (let [sieve-bound (int (Math/pow 10 (Math/ceil i)))
                           n-primes (num-primes-below sieve-bound)]
@@ -14,14 +22,6 @@
   [& args]
   (/ (reduce + args)
      (count args)))
-
-(defn num-primes-below
-  "How many primes are below N?"
-  [n]
-  ;; FIXME: this is an APPROXIMATION, based on Gauss & Legendre
-  ;; https://en.wikipedia.org/wiki/Prime-counting_function
-  (int (/ n
-          (Math/log n))))
 
 (defn print-array [a]
   (println (->> a
