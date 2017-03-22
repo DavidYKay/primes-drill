@@ -1,5 +1,5 @@
 (ns primes.core
-  [:require [clojure.string :as string]])
+  [:require [primes.output :refer [format-prime-table]]])
 
 (defn num-primes-below
   "How many primes are below N?"
@@ -23,10 +23,6 @@
   (/ (reduce + args)
      (count args)))
 
-(defn print-array [a]
-  (println (->> a
-                (map str)
-                (string/join ", "))))
 
 (defn find-sieve-upper-bound
   "Given a number of primes to find, K, return the upper bound we will need to sieve for.
@@ -78,37 +74,6 @@
      :products (for [a primes]
                  (for [b primes]
                    (* a b)))}))
-
-(def vertical-divider "|")
-
-(defn dividing-string [n]
-  (apply str (repeat n "-")))
-
-(defn format-prime-table [{:keys [primes products]}]
-  (let [column-width (->> products
-                          flatten
-                          (apply max)
-                          str
-                          count)
-        header (string/join " " primes)]
-    (loop [accum [header (dividing-string (count header))]
-           primes primes
-           products products]
-      (if (or (empty? primes)
-              (empty? products))
-        (string/join "\n" accum)
-        (recur
-         (conj accum (string/join " " [(first primes) vertical-divider
-                                       (string/join " " (first products))
-                                       ]))
-         (rest primes)
-         (rest products))))))
-
-(defn print-prime-table
-  "Prints multiplication table of the first k prime numbers."
-  [k]
-  (println (format-prime-table (prime-table k))))
-
 ;; Notes 
 ;; ● Consider complexity. How fast does your code run? How does it scale? 
 ;; ● Consider cases where we want ​N ​ primes. 
@@ -116,6 +81,11 @@
 ;; ● Write tests. Try to demonstrate TDD/BDD. 
 ;; ● If you’re using external dependencies please specify those dependencies and how to install them. 
 ;; ● Please ​package your code​, OR include running instructions. 
+
+(defn print-prime-table
+  "Prints multiplication table of the first k prime numbers."
+  [k]
+  (println (format-prime-table (prime-table k))))
 
 (defn -main
   "Prints multiplication table of the first 10 prime numbers."
