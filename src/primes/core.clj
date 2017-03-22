@@ -1,5 +1,6 @@
 (ns primes.core
-  [:require [primes.output :refer [format-prime-table]]])
+  [:require [primes.output :refer [format-prime-table]]]
+  (:gen-class))
 
 (defn num-primes-below
   "How many primes are below N?
