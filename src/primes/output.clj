@@ -3,13 +3,13 @@
 
 (def vertical-divider "|")
 
-(defn- dividing-string [n]
+(defn dividing-string [n]
   (apply str (repeat n "-")))
 
-(defn- pad-entry [e desired-len]
+(defn pad-entry [e desired-len]
   (let [len (count (str e))]
     (if (< len desired-len)
-      (str (repeat (- desired-len len) " ") e)
+      (str (reduce str (repeat (- desired-len len) " ")) e)
       e)))
 
 (defn format-prime-table [{:keys [primes products]}]
