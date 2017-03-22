@@ -69,9 +69,19 @@
   (let [upper-bound (find-sieve-upper-bound k)]
     (take k (prime-sieve upper-bound))))
 
-(defn print-prime-table []
+(defn prime-table
+  "Multiplication table of the first k prime numbers."
+  [k]
+  (let [primes (get-primes k)]
+    (for [a primes]
+      (for [b primes]
+        (* a b)))))
 
-  )
+(defn print-prime-table
+  "Prints multiplication table of the first k prime numbers."
+  [k]
+  (doseq [row (prime-table k)]
+    (println row)))
 
 ;; Notes 
 ;; ● Consider complexity. How fast does your code run? How does it scale? 
@@ -84,4 +94,4 @@
 (defn -main
   "Prints multiplication table of the first 10 prime numbers."
   [x]
-  (print-prime-table))
+  (print-prime-table 10))
