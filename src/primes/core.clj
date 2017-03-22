@@ -20,7 +20,6 @@
 (defn square [x]
   (* x x))
 
-
 (defn find-sieve-upper-bound
   "Given a number of primes to find, K, return the upper bound we will need to sieve for.
   Note: this could definitely be optimized. We use a lookup table that only has every power of 10 present."
@@ -33,14 +32,14 @@
 
 (defn prime-sieve
   "Use a sieve to find all primes up to N.
-  Implemented using SIeve of Eratosthenes
+  Implemented using Sieve of Eratosthenes
   https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes
   Very imperative style for now. Can come back later and make it more functional."
   [n]
   ;; Input: an integer n > 1.
   ;;  
   ;;  Let A be an array of Boolean values, indexed by integers 2 to n, initially all set to true.
-  ;(let [array (make-array Boolean/TYPE n)]
+  ;; Note: into-array likely less performant than make-array. Optimize this if necessary.
   (let [array (into-array (repeat n true))]
     ;;  for i = 2, 3, 4, ..., not exceeding √n:
     (doseq [i (range 2 (Math/sqrt n))]
