@@ -6,6 +6,10 @@
 (defn square [x]
   (* x x))
 
+(defn avg [& args]
+  (/ (reduce + args)
+     (count args)))
+
 (defn num-primes-below
   "How many primes are below N?"
   [n]
@@ -18,6 +22,16 @@
   (println (->> a
                 (map str)
                 (string/join ", "))))
+
+(defn find-sieve-upper-bound
+  "Given a number of primes to find, K, return the upper bound we will need to sieve for."
+  [k]
+  (loop [bot 0
+         top Integer/MAX_VALUE
+         mid (avg top bot)
+         ]
+
+    ))
 
 (defn prime-sieve
   "Use a sieve to find all primes up to N.
@@ -45,6 +59,11 @@
          (drop 2)
          (filter (fn [[i x]] (true? x)))
          (map first))))
+
+(defn get-primes [k]
+  "Find k primes"
+  (let [upper-bound (find-sieve-upper-bound k)]
+    (take k (prime-sieve upper-bound))))
 
 (defn print-prime-table []
 
