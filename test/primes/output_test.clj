@@ -18,7 +18,7 @@
 
 (facts "Pad Entry"
        (fact "Can pad entry"
-             (pad-entry "1" 3) => "  1"))
+             (pad-entry 3 "1") => "  1"))
 
 (facts "Format prime table"
        (fact "Can format header"

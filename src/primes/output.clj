@@ -12,27 +12,27 @@
    (repeat-string " " (inc cell-width))
    (repeat-string horizontal-divider (inc (* num-primes (inc cell-width))))))
 
-(defn pad-entry [e cell-width]
+(defn pad-entry [cell-width e]
   (let [len (count (str e))]
     (if (< len cell-width)
       (str (reduce str (repeat (- cell-width len) " ")) e)
       e)))
 
-(defn cell [product cell-width]
-  (pad-entry product cell-width))
+(defn cell [cell-width product]
+  (pad-entry cell-width product))
 
 (defn row [cell-width prime product-row]
   (string/join " "
-               (flatten [(cell prime cell-width)
+               (flatten [(cell cell-width prime)
                          vertical-divider
                          (for [product product-row]
-                           (cell product cell-width))])))
+                           (cell cell-width product))])))
 
 (defn header [cell-width primes]
   (str
    (repeat-string " " (* 2 cell-width))
    (string/join " "
-                (map #(cell % cell-width) primes))))
+                (map #(cell cell-width %) primes))))
 
 (defn format-prime-table [{:keys [primes products]}]
   (let [cell-width (->> products
