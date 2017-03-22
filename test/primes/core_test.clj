@@ -2,9 +2,8 @@
   (:require [midje.sweet :refer :all]
             [primes.core :refer :all]))
 
-
-(fact "Addition works"
- (+ 1 1) => 2)
-
-(fact "Failing test"
- (+ 3 2) => 4)
+(facts "Prime Counting"
+       (fact "Prime counting works 100% accurately"
+             (primes-below-n 100) => 25)
+       (fact "Prime counting works as described by Gauss"
+             (primes-below-n 100) => 21))
