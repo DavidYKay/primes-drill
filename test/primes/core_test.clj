@@ -4,9 +4,9 @@
 
 (facts "Prime Counting"
        (fact "Prime counting works 100% accurately"
-             (primes-below-n 100) => 25)
+             (num-primes-below 100) => 25)
        (fact "Prime counting works as described by Gauss"
-             (primes-below-n 100) => 21))
+             (num-primes-below 100) => 21))
 
 (facts "Prime Sieve"
        (fact "Can find primes below 30"

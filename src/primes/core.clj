@@ -6,7 +6,7 @@
 (defn square [x]
   (* x x))
 
-(defn primes-below-n
+(defn num-primes-below
   "How many primes are below N?"
   [n]
   ;; FIXME: this is an APPROXIMATION, based on Gauss & Legendre
@@ -39,16 +39,12 @@
           ;;        A[j] := false.
           (aset array j false))))
 
-    ;;(print-array array)
-
     ;;  Output: all i such that A[i] is true.
     (->> array
          (map-indexed (fn [i x] [i x]))
          (drop 2)
          (filter (fn [[i x]] (true? x)))
-         (map first))
-    ))
-    
+         (map first))))
 
 (defn print-prime-table []
 
