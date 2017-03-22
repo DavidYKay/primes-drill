@@ -35,3 +35,9 @@
                                               (46 69 115 161 253 299 391 437 529 667) (58 87 145 203 319 377 493 551 667 841))
 
                                   }))
+
+(facts "Arg parsing"
+       (fact "Can parse an argument"
+             (read-int "") => nil
+             (read-int nil) => nil
+             (read-int "1") => 1))

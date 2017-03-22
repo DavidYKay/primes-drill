@@ -83,7 +83,14 @@
   [k]
   (println (format-prime-table (prime-table k))))
 
+(defn read-int [s]
+  (try
+    (Integer/parseInt s)
+    (catch NumberFormatException e
+      nil)))
+    
 (defn -main
   "Prints multiplication table of the first 10 prime numbers."
   [& args]
-  (print-prime-table 10))
+  (print-prime-table (or (read-int (first args))
+                         10)))
