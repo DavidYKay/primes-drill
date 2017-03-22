@@ -29,7 +29,8 @@
                 (string/join ", "))))
 
 (defn find-sieve-upper-bound
-  "Given a number of primes to find, K, return the upper bound we will need to sieve for."
+  "Given a number of primes to find, K, return the upper bound we will need to sieve for.
+  Note: this could definitely be optimized. We use a lookup table that only has every power of 10 present."
   [k]
   (->> sieve-bounds
        (filter (fn [[n-primes sieve-bound]]
@@ -73,9 +74,10 @@
   "Multiplication table of the first k prime numbers."
   [k]
   (let [primes (get-primes k)]
-    (for [a primes]
-      (for [b primes]
-        (* a b)))))
+    {:primes primes
+     :products (for [a primes]
+                 (for [b primes]
+                   (* a b)))}))
 
 (defn print-prime-table
   "Prints multiplication table of the first k prime numbers."
