@@ -1,7 +1,10 @@
 (ns primes.core-test
-  (:require [clojure.test :refer :all]
+  (:require [midje.sweet :refer :all]
             [primes.core :refer :all]))
 
-(deftest a-test
-  (testing "FIXME, I fail."
-    (is (= 0 1))))
+
+(fact "Addition works"
+ (+ 1 1) => 2)
+
+(fact "Failing test"
+ (+ 3 2) => 4)
