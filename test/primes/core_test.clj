@@ -21,12 +21,6 @@
        (future-fact "Can find sieve upper bound, exactly"
              (find-sieve-upper-bound 25) => 100))
 
-(facts "Basic Arithmetic"
-       (fact "Can find average"
-             (avg 0 100) => 50
-             (avg 10 20) => 15
-             (avg 10 11) => 21/2))
-
 (facts "Prime Multiplication Table"
        (fact "Can find basic multiplication table"
              (prime-table 10) => {:primes '(2 3 5 7 11 13 17 19 23 29)

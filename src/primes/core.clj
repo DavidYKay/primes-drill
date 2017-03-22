@@ -17,12 +17,6 @@
 (defn square [x]
   (* x x))
 
-(defn avg
-  "Finds the truncated integer mean"
-  [& args]
-  (/ (reduce + args)
-     (count args)))
-
 
 (defn find-sieve-upper-bound
   "Given a number of primes to find, K, return the upper bound we will need to sieve for.
