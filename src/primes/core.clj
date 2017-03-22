@@ -2,10 +2,12 @@
   [:require [primes.output :refer [format-prime-table]]])
 
 (defn num-primes-below
-  "How many primes are below N?"
+  "How many primes are below N?
+
+  Note: this implementation is an APPROXIMATION, based on Gauss & Legendre
+  The good news is that it under-counts, so we will never end up with too low of a ceiling / too few primes. We will, however, end up doing a bit of extra computation in prime-sieve.
+  https://en.wikipedia.org/wiki/Prime-counting_function"
   [n]
-  ;; FIXME: this is an APPROXIMATION, based on Gauss & Legendre
-  ;; https://en.wikipedia.org/wiki/Prime-counting_function
   (int (/ n
           (Math/log n))))
 
